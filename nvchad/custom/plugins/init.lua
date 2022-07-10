@@ -6,10 +6,18 @@ return {
       end,
    },
 
+   ["aserowy/tmux.nvim"] = {
+      config = function()
+         require("custom.plugins.configs.tmux").setup()
+      end,
+   },
+
+   ["github/copilot.vim"] = {},
+
    ["jose-elias-alvarez/null-ls.nvim"] = {
       opt = true,
       setup = function()
-         require("core.lazy_load").on_file_open "nvim-surround"
+         require("core.lazy_load").on_file_open "null-ls.nvim"
       end,
       after = "nvim-lspconfig",
       config = function()
@@ -20,7 +28,7 @@ return {
    ["ThePrimeagen/refactoring.nvim"] = {
       opt = true,
       setup = function()
-         require("core.lazy_load").on_file_open "nvim-surround"
+         require("core.lazy_load").on_file_open "refactoring.nvim"
       end,
       after = {
          "plenary.nvim",

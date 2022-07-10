@@ -1,5 +1,16 @@
 local M = {}
 
+M.copilot = {
+   i = {
+
+      ["<C-h>"] = {
+         'copilot#Accept("<Left>")',
+         "   Copilot Accept",
+         opts = { expr = true },
+      },
+   },
+}
+
 M.refactor = {
    v = {
       ["<leader>re"] = {
