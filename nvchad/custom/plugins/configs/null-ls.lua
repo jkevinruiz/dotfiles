@@ -1,38 +1,38 @@
-local null_ls = require "null-ls"
+local null_ls = require("null-ls")
 local b = null_ls.builtins
 
 local sources = {
-   -- web
-   b.formatting.prettierd,
-   -- b.formatting.denofmt,
+	-- web
+	b.formatting.deno_fmt,
+	b.formatting.prettier.with({ filetypes = { "html", "markdown", "css" } }),
 
-   -- Lua
-   b.formatting.stylua,
-   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
+	-- Lua
+	b.formatting.stylua,
+	b.diagnostics.luacheck.with({ extra_args = { "--global vim" } }),
 
-   -- Shell
-   b.formatting.shfmt,
-   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+	-- Shell
+	b.formatting.shfmt,
+	b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
 
-   -- Go
-   b.formatting.gofmt,
-   b.formatting.goimports,
+	-- Go
+	b.formatting.gofmt,
+	b.formatting.goimports,
 }
 
 local M = {}
 
 M.setup = function()
-   null_ls.setup {
-      debug = false,
-      sources = sources,
+	null_ls.setup({
+		debug = true,
+		sources = sources,
 
-      -- format on save
-      on_attach = function(client)
-         if client.resolved_capabilities.document_formatting then
-            vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
-         end
-      end,
-   }
+		-- format on save
+		on_attach = function(client)
+			if client.resolved_capabilities.document_formatting then
+				vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+			end
+		end,
+	})
 end
 
 return M
